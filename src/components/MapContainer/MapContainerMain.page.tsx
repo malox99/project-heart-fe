@@ -4,7 +4,7 @@ const MapContainerMain = () => {
   const fillBlueOptions = { fillColor: 'blue' }
   
   return (
-    <MapContainer style={{height: '98vh'}} center={[41.683333, 14.7]} zoom={13} zoomControl={false}>
+    <MapContainer style={{height: '100vh'}} center={[41.683333, 14.7]} zoom={13} zoomControl={false}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
