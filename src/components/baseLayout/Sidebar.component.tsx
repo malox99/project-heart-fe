@@ -1,10 +1,17 @@
 import { Stack } from "@mui/material";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import CustomIcon from "../CustomIcon.compent";
 import { routes } from "../../routes/routes";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setIsOpenSidebar,
+  setSelectedRoute,
+} from "../../store/reducers/layout/layoutSlice";
+import { RootState } from "../../store/Store";
+import { useEffect } from "react";
 
 const sidebarStyle = {
-  width: "70px",
+  width: 70,
   height: "100vh",
   borderRight: "1px solid lightgray",
   alignItems: "center",
@@ -15,6 +22,13 @@ const sidebarStyle = {
 
 const Sidebar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { isOpen, selectedRoute } = useSelector((store: RootState) => store.layout);
+
+  useEffect(() => {
+    dispatch(setSelectedRoute(location.pathname));
+  }, [location.pathname]);
 
   const Divider = () => {
     return (
@@ -31,11 +45,15 @@ const Sidebar = () => {
   return (
     <Stack sx={sidebarStyle}>
       <Stack width={"100%"} alignItems={"center"}>
-        <CustomIcon name="menu" />
+        <CustomIcon
+          name="menu"
+          onClickIcon={() => dispatch(setIsOpenSidebar(!isOpen))}
+        />
         <Divider />
         {routes.map((route, idx) => (
           <CustomIcon
             key={idx}
+            color={route.url === selectedRoute ? 'red' : ''}
             name={route.icon}
             onClickIcon={() => navigate(route.url)}
           />
@@ -44,7 +62,7 @@ const Sidebar = () => {
 
       <Stack width={"100%"} alignItems={"center"}>
         <Divider />
-        <CustomIcon name="logout" onClickIcon={() => navigate('/')}/>
+        <CustomIcon name="logout" onClickIcon={() => navigate("/")} />
       </Stack>
     </Stack>
   );
