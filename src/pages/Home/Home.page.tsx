@@ -1,11 +1,45 @@
-import { Stack } from "@mui/material";
+import { Button, Grid, Stack, Typography } from "@mui/material";
+import Card from "../../components/Card/Card.component";
+import HomeTextField from "../../components/HomeTextField/HomeTextField.component";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { setStartPosition } from "../../store/reducers/locations/locationsSlice";
 
 const Home = () => {
-  return (
-    <Stack p={2}>
-      Home
-    </Stack>
-  )
-}
+  const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
 
-export default Home
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+      dispatch(setStartPosition([latitude, longitude]));
+    });
+  }, []);
+
+  return (
+    <Stack p={2} gap={2} padding={"100px 300px"}>
+      <Typography variant="h4" textAlign={"center"}>
+        Dove?
+      </Typography>
+
+      <Stack direction={"row"} gap={1} px={6}>
+        <HomeTextField />
+        <Button variant="primary" onClick={() => navigate("/main-zone-view")}>
+          Cerca
+        </Button>
+      </Stack>
+
+      <Stack mt={4} gap={2}>
+        <Typography variant="h6">Potrebbero interessarti</Typography>
+        <Grid container spacing={2}>
+          {new Array(4).fill("").map((el, idx) => (
+            <Card key={idx} />
+          ))}
+        </Grid>
+      </Stack>
+    </Stack>
+  );
+};
+
+export default Home;

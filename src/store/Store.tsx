@@ -1,8 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import layoutReducer from "./reducers/layout/layoutSlice";
+import locationsReducer from "./reducers/locations/locationsSlice";
 
 const rootReducer = {
   layout: layoutReducer,
+  locations: locationsReducer
 };
 
 export const store = configureStore({

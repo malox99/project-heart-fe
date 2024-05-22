@@ -1,24 +1,26 @@
-import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
-import SharedLayout from "./pages/SharedLayout/SharedLayout.page";
+import { ThemeProvider } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home.page";
-import MainZoneView from "./pages/MainZoneView/MainZoneView.pages";
 import Login from "./pages/Login/Login.page";
+import MainZoneView from "./pages/MainZoneView/MainZoneView.pages";
+import SharedLayout from "./pages/SharedLayout/SharedLayout.page";
+import { customTheme } from "./theme/theme";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        {["/", "/login"].map((path) => (
-          <Route key={path} path={path} element={<Login />} />
-        ))}
-        <Route path="/" element={<SharedLayout />}>
-          <Route path={"home"} element={<Home />} />
-          <Route path={"main-zone-view"} element={<MainZoneView />} />
-        </Route>
+    <ThemeProvider theme={customTheme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SharedLayout />}>
+            <Route path={"main-zone-view"} element={<MainZoneView />} />
+            <Route path={"home"} element={<Home />} />
+            <Route path={"login"} element={<Login />} />
+          </Route>
 
-        {/* <Route path='*' element={<SharedLayout/>}></Route> */}
-      </Routes>
-    </BrowserRouter>
+          {/* <Route path='*' element={<SharedLayout/>}></Route> */}
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
