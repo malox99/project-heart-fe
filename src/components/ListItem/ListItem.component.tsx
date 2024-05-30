@@ -29,10 +29,9 @@ const ListItem = ({ title, category }: IProps) => {
         borderRadius: "7px",
         cursor: "pointer",
         background: colors.secondary,
-        color: "white",
         boxShadow: "0px 0px 4px 0px #000000",
         "&:hover": {
-          opacity: 0.3,
+          opacity: 0.5,
           boxShadow: "none",
         },
       }}
@@ -46,9 +45,9 @@ const ListItem = ({ title, category }: IProps) => {
       >
         <CustomIcon name={getIcon()} color={colors.primary} />
         <Stack>
-          <Typography variant="body1">{title}</Typography>
-          <Typography variant="caption">Petrella Tifernina (CB)</Typography>
-          <Typography variant="caption">Via di prova, 1</Typography>
+          <Typography variant="body1" sx={{color: 'white'}}>{title}</Typography>
+          <Typography variant="caption" sx={{color: 'white'}}>Petrella Tifernina (CB)</Typography>
+          <Typography variant="caption" sx={{color: 'white'}}>Via di prova, 1</Typography>
         </Stack>
         <Stack alignItems={"flex-end"} flex={1}>
           <CustomIcon name="chevron_right" color={colors.primary} />

@@ -9,10 +9,11 @@ interface IProps {
 }
 
 const MapContainerMain = ({ height, center, locations }: IProps) => {
+
   const getRightIcon = (category: TCategory) => {
     return new Icon({
       iconUrl: require(`../../assets/icons/${category.toLowerCase()}-icon.png`),
-      iconSize: [45, 45],
+      iconSize: [55, 55],
     });
   };
 
@@ -25,6 +26,11 @@ const MapContainerMain = ({ height, center, locations }: IProps) => {
       fadeAnimation
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Marker
+          interactive
+            position={center as LatLngExpression}
+            icon={getRightIcon('USER')}
+          />
       {locations?.length > 0 &&
         locations.map((location, idx) => (
           <Marker

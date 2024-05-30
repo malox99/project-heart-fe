@@ -5,12 +5,10 @@ const authFetch = axios.create({
 });
 
 authFetch.interceptors.request.use((req) => {
-  console.log("request");
   return req;
 });
 
 authFetch.interceptors.response.use((res) => {
-  console.log("response");
   return res;
 });
 

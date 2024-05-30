@@ -1,6 +1,6 @@
 import { LatLngExpression } from "leaflet";
 
-export type TCategory = 'BAR' | 'RISTORANTE'
+export type TCategory = 'BAR' | 'RISTORANTE' | 'USER'
 
 export interface ILocation {
   id: string;

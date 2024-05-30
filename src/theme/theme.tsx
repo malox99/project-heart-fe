@@ -52,7 +52,18 @@ export const customTheme = createTheme({
             },
           },
         },
+        {
+          props: { variant: "text" },
+          style: {
+            color: colors.secondary,
+          },
+        },
       ],
+    },
+    MuiCircularProgress: {
+      styleOverrides: {colorPrimary: {
+        color: colors.primary
+      }}
     }
   },
 });

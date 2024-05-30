@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getLocations } from "../../store/reducers/locations/locationsSlice";
 import { RootState } from "../../store/Store";
+import MainZoneViewFilters from "./components/MainZoneViewFilters.component";
 
 const MainZoneView = () => {
   const dispatch = useDispatch<any>();
@@ -17,7 +18,9 @@ const MainZoneView = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <>
+    <MainZoneViewFilters />
+    <Grid container spacing={2} height={"100%"}>
       <Grid item xs={4}>
         <Stack spacing={2}>
           {locations?.length > 0 &&
@@ -37,13 +40,14 @@ const MainZoneView = () => {
       <Grid item xs={8}>
         {startPosition && (
           <MapContainerMain
-            height="calc(100vh - 144px)"
+            height="100%"
             center={startPosition}
             locations={locations}
           />
         )}
       </Grid>
     </Grid>
+    </>
   );
 };
 
