@@ -2,11 +2,15 @@ import { Stack, SxProps, Typography } from "@mui/material";
 import { colors } from "../../theme/palette";
 import CustomIcon from "../CustomIcon.compent";
 import { IAddress, TCategory } from "../../types/locationSlice.type";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/Store";
 
 interface IProps {
   title: string;
   category?: TCategory;
   address: IAddress;
+  id: string;
+  onClick: () => void;
 }
 
 const listStyleContainer: SxProps = {
@@ -15,13 +19,13 @@ const listStyleContainer: SxProps = {
   cursor: "pointer",
   background: colors.secondary,
   boxShadow: "0px 0px 4px 0px #000000",
-  "&:hover": {
-    opacity: 0.8,
-    boxShadow: "none",
-  },
 };
 
-const ListItem = ({ title, category, address }: IProps) => {
+const ListItem = ({ title, category, address, id, onClick }: IProps) => {
+  const { selectedLocation } = useSelector(
+    (store: RootState) => store.locations
+  );
+
   const getIcon = () => {
     switch (category) {
       case "RISTORANTE":
@@ -34,7 +38,15 @@ const ListItem = ({ title, category, address }: IProps) => {
   };
 
   return (
-    <Stack width={"100%"} height={90} sx={listStyleContainer}>
+    <Stack
+      width={"100%"}
+      height={90}
+      sx={{
+        ...listStyleContainer,
+        opacity: selectedLocation ? (selectedLocation?.id !== id ? 0.2 : 1) : 1,
+      }}
+      onClick={onClick}
+    >
       <Stack
         direction={"row"}
         alignItems={"center"}
@@ -48,10 +60,10 @@ const ListItem = ({ title, category, address }: IProps) => {
             {title}
           </Typography>
           <Typography variant="caption" sx={{ color: "white" }}>
-            Petrella Tifernina (CB)
+            {address.city}
           </Typography>
           <Typography variant="caption" sx={{ color: "white" }}>
-            {address.addressLine1} {address.streetNumber}, {address.city}
+            {address.addressLine1} {address.streetNumber}
           </Typography>
         </Stack>
         <Stack alignItems={"flex-end"} flex={1}>

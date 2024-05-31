@@ -16,7 +16,7 @@ export interface IAddress {
   addressLine2: string;
   city: string;
   postalCode: string;
-  primaryAddress: 'Y' | 'N';
+  primaryAddress: "Y" | "N";
   region: {
     id: number;
     region_name: string;
@@ -38,6 +38,6 @@ export interface ILocationAddress {
 }
 
 export interface ILocationsInitial {
-  startPosition?: LatLngExpression;
   locations: ILocationAddress[];
+  selectedLocation: ILocation | null;
 }

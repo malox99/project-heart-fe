@@ -8,14 +8,34 @@ declare module "@mui/material/Button" {
   }
 }
 
-declare module "@mui/material/TextField" {
-  interface BaseTextFieldProps {
-    variant: "home";
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    breadcrumb: true;
   }
 }
 
 export const customTheme = createTheme({
   components: {
+    MuiStack: {
+styleOverrides: {
+  root: {
+    "&::-webkit-scrollbar": {
+      width: 9,
+    },
+    "&::-webkit-scrollbar-track": {
+      background: 'transparent',
+      boxShadow: `inset 0 0 5px #dddddd`,
+      borderLeft: '4px solid transparent',
+      borderRight: '4px solid transparent'
+    },
+    "&::-webkit-scrollbar-thumb": {
+      backgroundColor: colors.gray.light,
+      borderRadius: '5px',
+      height: '60px'
+    },
+  },
+}
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -55,15 +75,37 @@ export const customTheme = createTheme({
         {
           props: { variant: "text" },
           style: {
-            color: colors.secondary,
+            color: colors.gray.medium,
+            fontWeight: 300,
+            fontSize: 13,
+            padding: 0,
+            minWidth: 0,
+            textTransform: "none",
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
           },
         },
       ],
     },
     MuiCircularProgress: {
-      styleOverrides: {colorPrimary: {
-        color: colors.primary
-      }}
-    }
+      styleOverrides: {
+        colorPrimary: {
+          color: colors.primary,
+        },
+      },
+    },
+    MuiTypography: {
+      variants: [
+        {
+          props: { variant: "breadcrumb" },
+          style: {
+            color: colors.secondary,
+            fontWeight: 500,
+            fontSize: 14,
+          },
+        },
+      ],
+    },
   },
 });

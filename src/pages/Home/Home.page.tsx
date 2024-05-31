@@ -1,25 +1,26 @@
 import { Button, Grid, Stack, Typography } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import Card from "../../components/Card/Card.component";
 import HomeTextField from "../../components/HomeTextField/HomeTextField.component";
-import { useNavigate } from "react-router";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setStartPosition } from "../../store/reducers/locations/locationsSlice";
 import { setShowSpinner } from "../../store/reducers/layout/layoutSlice";
-import { RootState } from "../../store/Store";
+import { getFromSessionStorage, setToSessionStorage } from "../../utils/utils";
 
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
+  const startPosition = getFromSessionStorage("startPosition");
 
   useEffect(() => {
-    dispatch(setShowSpinner(true));
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      dispatch(setStartPosition([latitude, longitude]));
-      dispatch(setShowSpinner(false));
-    });
+    if (!startPosition) {
+      dispatch(setShowSpinner(true));
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setToSessionStorage("startPosition", [latitude, longitude]);
+        dispatch(setShowSpinner(false));
+      });
+    }
   }, []);
 
   return (
@@ -30,7 +31,7 @@ const Home = () => {
 
       <Stack direction={"row"} gap={1} px={6}>
         <HomeTextField />
-        <Button variant="primary" onClick={() => navigate("main-zone-view")}>
+        <Button variant="primary" onClick={() => navigate("/locations")}>
           Cerca
         </Button>
       </Stack>

@@ -7,12 +7,15 @@ import { RootState } from "../../store/Store";
 import { getLocations } from "../../store/reducers/locations/locationsSlice";
 import { ILocationAddress } from "../../types/locationSlice.type";
 import MainZoneViewFilters from "./components/MainZoneViewFilters.component";
+import { useNavigate } from "react-router";
+import { getFromSessionStorage } from "../../utils/utils";
 
-const MainZoneView = () => {
+const Locations = () => {
   const dispatch = useDispatch<any>();
-  const { startPosition, locations } = useSelector(
-    (state: RootState) => state.locations
-  );
+  const navigate = useNavigate();
+  const { locations } = useSelector((state: RootState) => state.locations);
+
+  const startPosition = getFromSessionStorage("startPosition");
 
   useEffect(() => {
     dispatch(getLocations(""));
@@ -23,13 +26,26 @@ const MainZoneView = () => {
       <MainZoneViewFilters />
       <Grid container spacing={2} height={"100%"}>
         <Grid item xs={4}>
-          <Stack spacing={2}>
+          <Stack
+            spacing={2}
+            p={"8px 8px 8px 0"}
+            maxHeight={"calc(100vh - 258px)"}
+            overflow={"auto"}
+            sx={{
+              "& ::-webkit-scrollbar-track": {
+                background: "red",
+                border: '1px solid'
+              },
+            }}
+          >
             {locations?.length > 0 &&
               locations.map(({ location, address }: ILocationAddress, idx) => (
                 <ListItem
                   key={idx}
+                  onClick={() => navigate(`/locations/${location.id}`)}
                   address={address}
                   title={location.name}
+                  id={location.id}
                   category={
                     location.category.length > 0
                       ? location.category[0]
@@ -53,4 +69,4 @@ const MainZoneView = () => {
   );
 };
 
-export default MainZoneView;
+export default Locations;
