@@ -1,15 +1,14 @@
 import { Icon, LatLngExpression } from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import { ILocation, TCategory } from "../../types/locationSlice.type";
+import { ILocationAddress, TCategory } from "../../types/locationSlice.type";
 
 interface IProps {
   height?: string;
   center?: LatLngExpression;
-  locations: ILocation[];
+  locations: ILocationAddress[];
 }
 
 const MapContainerMain = ({ height, center, locations }: IProps) => {
-
   const getRightIcon = (category: TCategory) => {
     return new Icon({
       iconUrl: require(`../../assets/icons/${category.toLowerCase()}-icon.png`),
@@ -27,17 +26,21 @@ const MapContainerMain = ({ height, center, locations }: IProps) => {
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker
-          interactive
-            position={center as LatLngExpression}
-            icon={getRightIcon('USER')}
-          />
+        interactive
+        position={center as LatLngExpression}
+        icon={getRightIcon("USER")}
+      />
       {locations?.length > 0 &&
-        locations.map((location, idx) => (
+        locations.map(({ location }: ILocationAddress, idx) => (
           <Marker
-          interactive
+            interactive
             key={idx}
             position={location.position}
-            icon={location.category.length > 0 ? getRightIcon(location.category[0]) : undefined}
+            icon={
+              location.category.length > 0
+                ? getRightIcon(location.category[0])
+                : undefined
+            }
           />
         ))}
     </MapContainer>

@@ -3,9 +3,10 @@ import Card from "../../components/Card/Card.component";
 import HomeTextField from "../../components/HomeTextField/HomeTextField.component";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStartPosition } from "../../store/reducers/locations/locationsSlice";
 import { setShowSpinner } from "../../store/reducers/layout/layoutSlice";
+import { RootState } from "../../store/Store";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -13,12 +14,11 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(setShowSpinner(true));
-    
+
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       dispatch(setStartPosition([latitude, longitude]));
       dispatch(setShowSpinner(false));
-      
     });
   }, []);
 
