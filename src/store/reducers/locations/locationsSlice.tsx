@@ -1,7 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ILocationsInitial } from "../../../types/locationSlice.type";
+import { ILocation, ILocationsInitial } from "../../../types/locationSlice.type";
 import { getLocationsThunk } from "./locationsThunk";
-import { LatLngExpression } from "leaflet";
 
 export const getLocations = createAsyncThunk(
   "locations/getLocations",
@@ -9,19 +8,19 @@ export const getLocations = createAsyncThunk(
 );
 
 const initialState: ILocationsInitial = {
-  startPosition: undefined,
   locations: [],
+  selectedLocation: null
 };
 
 const locationsSlice = createSlice({
   name: "layoutSlice",
   initialState,
   reducers: {
-    setStartPosition: (
+    setSelectedLocation: (
       state: ILocationsInitial,
-      action: PayloadAction<LatLngExpression>
+      action: PayloadAction<ILocation | null>
     ) => {
-      state.startPosition = action.payload;
+      state.selectedLocation = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -31,5 +30,5 @@ const locationsSlice = createSlice({
   },
 });
 
-export const { setStartPosition } = locationsSlice.actions;
+export const { setSelectedLocation } = locationsSlice.actions;
 export default locationsSlice.reducer;

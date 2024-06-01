@@ -1,8 +1,9 @@
 import authFetch from "../../../utils/axios";
+import { getFromSessionStorage } from "../../../utils/utils";
 
 export const getLocationsThunk = async (_: string, thunkAPI: any) => {
-  const getLocationsURL = "/locations/findNearLocations";
-  const { startPosition } = thunkAPI.getState().locations;
+  const getLocationsURL = "/locations/findNearLocationsAndAdress";
+  const startPosition = getFromSessionStorage("startPosition");
 
   const body = { currentPoint: startPosition, maxDistance: 30 };
 
