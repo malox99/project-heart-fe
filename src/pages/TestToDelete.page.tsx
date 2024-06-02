@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 const TestToDelete = () => {
-  const url = "http://194.164.164.192:8090/api/v1/locations/uploadPhotoToLocation"
+  const url = "http://localhost:8080/api/v1/locations/uploadPhotoToLocation"
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [locationId, setLocationId] = useState<string>('');
 
@@ -54,7 +54,7 @@ const TestToDelete = () => {
         <button type="submit">Upload</button>
       </form>
 
-      <img src=''/>
+      <img src='http://localhost:8080/api/v1/images/getImages/6658da164cb37b70ba2a6015/4654614.jpg'/>
     </div>
   );
 };
