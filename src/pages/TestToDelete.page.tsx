@@ -18,6 +18,7 @@ const TestToDelete = () => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    //test
 
     if (!selectedFile || !locationId) {
       alert('Please select a file and enter a location ID.');
