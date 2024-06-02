@@ -1,7 +1,7 @@
 import { Button, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate} from "react-router";
 import { setSelectedRoute } from "../../store/reducers/layout/layoutSlice";
 
 const sidebarStyle = {
@@ -16,6 +16,7 @@ const sidebarStyle = {
 
 const Navbar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,6 +28,7 @@ const Navbar = () => {
       <Typography variant="h4">Project Heart</Typography>
       <Stack direction={"row"} alignItems={"center"} gap={2}>
       </Stack>
+      <Typography variant="h6" sx={{cursor: 'pointer'}} onClick={() => navigate('/test')}>Test</Typography>
       <Button variant="secondary">Login</Button>
     </Stack>
   );
