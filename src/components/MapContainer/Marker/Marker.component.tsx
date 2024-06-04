@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Marker, useMap } from "react-leaflet";
-import {
-  ILocation,
-  ILocationAddress,
-  TCategory,
-} from "../../../types/locationSlice.type";
 import { Icon, LatLngExpression } from "leaflet";
+import { Marker, useMap } from "react-leaflet";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/Store";
 import { setSelectedLocation } from "../../../store/reducers/locations/locationsSlice";
+import {
+  ILocation,
+  TCategory
+} from "../../../types/locationSlice.type";
 
 export const getRightIcon = (category: TCategory) => {
   return new Icon({

@@ -16,25 +16,35 @@ declare module "@mui/material/Typography" {
 
 export const customTheme = createTheme({
   components: {
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          height: '40px',
+          "& .MuiOutlinedInput-notchedOutline": {
+            border: `1px solid ${colors.gray.light} !important`,
+          }
+        }
+      }
+    },
     MuiStack: {
-styleOverrides: {
-  root: {
-    "&::-webkit-scrollbar": {
-      width: 9,
-    },
-    "&::-webkit-scrollbar-track": {
-      background: 'transparent',
-      boxShadow: `inset 0 0 5px #dddddd`,
-      borderLeft: '4px solid transparent',
-      borderRight: '4px solid transparent'
-    },
-    "&::-webkit-scrollbar-thumb": {
-      backgroundColor: colors.gray.light,
-      borderRadius: '5px',
-      height: '60px'
-    },
-  },
-}
+      styleOverrides: {
+        root: {
+          "&::-webkit-scrollbar": {
+            width: 9,
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "transparent",
+            boxShadow: `inset 0 0 5px #dddddd`,
+            borderLeft: "4px solid transparent",
+            borderRight: "4px solid transparent",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            backgroundColor: colors.gray.light,
+            borderRadius: "5px",
+            height: "60px",
+          },
+        },
+      },
     },
     MuiButton: {
       styleOverrides: {
@@ -43,6 +53,12 @@ styleOverrides: {
           borderRadius: 20,
           paddingRight: 25,
           paddingLeft: 25,
+          '&:disabled': {
+            background: colors.gray.light,
+            color: 'white',
+            opacity: .7,
+            border: `1px solid ${colors.gray.light}`
+          }
         },
       },
       variants: [

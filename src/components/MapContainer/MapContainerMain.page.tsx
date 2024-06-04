@@ -16,8 +16,8 @@ const MapContainerMain = ({ height, center, locations }: IProps) => {
       style={{ height: height || "100vh" }}
       center={center}
       zoom={13}
-      scrollWheelZoom={false}
       fadeAnimation
+      zoomControl={false}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker

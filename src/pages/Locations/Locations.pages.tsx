@@ -4,11 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 import ListItem from "../../components/ListItem/ListItem.component";
 import MapContainerMain from "../../components/MapContainer/MapContainerMain.page";
 import { RootState } from "../../store/Store";
-import { getLocations } from "../../store/reducers/locations/locationsSlice";
+import {
+  getLocations,
+  setSelectedLocation,
+} from "../../store/reducers/locations/locationsSlice";
 import { ILocationAddress } from "../../types/locationSlice.type";
 import MainZoneViewFilters from "./components/MainZoneViewFilters.component";
 import { useNavigate } from "react-router";
 import { getFromSessionStorage } from "../../utils/utils";
+import { getTags, resetTags } from "../../store/reducers/tags/tagsSlice";
+import {
+  getCategories,
+  resetCategories,
+} from "../../store/reducers/categories/categoriesSlice";
 
 const Locations = () => {
   const dispatch = useDispatch<any>();
@@ -19,12 +27,19 @@ const Locations = () => {
 
   useEffect(() => {
     dispatch(getLocations(""));
+    dispatch(getTags(""));
+    dispatch(getCategories(""));
+    return () => {
+      dispatch(setSelectedLocation(null));
+      dispatch(resetCategories());
+      dispatch(resetTags());
+    };
   }, []);
 
   return (
     <>
       <MainZoneViewFilters />
-      <Grid container spacing={2} height={"100%"}>
+      <Grid container spacing={2} height={"100%"} mt={0.5}>
         <Grid item xs={4}>
           <Stack
             spacing={2}
@@ -34,7 +49,7 @@ const Locations = () => {
             sx={{
               "& ::-webkit-scrollbar-track": {
                 background: "red",
-                border: '1px solid'
+                border: "1px solid",
               },
             }}
           >

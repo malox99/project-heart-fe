@@ -22,8 +22,7 @@ const Breadcrumb = () => {
 
   const renderLabel = (path: string, idx: number) => {
     if (idx === 1 && location.pathname.indexOf("location") > -1) {
-      const name = locStore.locations.find((el) => el.location.id === path)
-        ?.location.name;
+      const name = locStore?.locationDetail?.name;
       return name;
     } else {
       return uppercaseFirstLetter(path);

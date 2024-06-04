@@ -37,7 +37,18 @@ export interface ILocationAddress {
   address: IAddress;
 }
 
+export interface ILocationDetail {
+  id: string;
+  name: string;
+  position: LatLngExpression;
+  category: TCategory[];
+  tags: string[];
+  photos: string[];
+}
+
 export interface ILocationsInitial {
   locations: ILocationAddress[];
+  locationDetail: ILocationDetail | null;
   selectedLocation: ILocation | null;
+  maxDistance: number;
 }

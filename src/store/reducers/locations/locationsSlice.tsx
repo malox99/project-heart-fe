@@ -1,15 +1,22 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ILocation, ILocationsInitial } from "../../../types/locationSlice.type";
-import { getLocationsThunk } from "./locationsThunk";
+import { getLocationDetailThunk, getLocationsThunk } from "./locationsThunk";
 
 export const getLocations = createAsyncThunk(
   "locations/getLocations",
   getLocationsThunk
 );
 
+export const getLocationDetail = createAsyncThunk(
+  "locations/getLocationDetail",
+  getLocationDetailThunk
+);
+
 const initialState: ILocationsInitial = {
   locations: [],
-  selectedLocation: null
+  locationDetail: null,
+  selectedLocation: null,
+  maxDistance: 5
 };
 
 const locationsSlice = createSlice({
@@ -22,13 +29,22 @@ const locationsSlice = createSlice({
     ) => {
       state.selectedLocation = action.payload;
     },
+    setMaxDistance: (
+      state: ILocationsInitial,
+      action: PayloadAction<number>
+    ) => {
+      state.maxDistance = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getLocations.fulfilled, (state, { payload }) => {
       state.locations = payload.data;
+    })
+    builder.addCase(getLocationDetail.fulfilled, (state, { payload }) => {      
+      state.locationDetail = payload.data;
     });
   },
 });
 
-export const { setSelectedLocation } = locationsSlice.actions;
+export const { setSelectedLocation, setMaxDistance } = locationsSlice.actions;
 export default locationsSlice.reducer;

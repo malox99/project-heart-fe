@@ -10,19 +10,13 @@ const SharedLayout = () => {
   const { showSpinner } = useSelector((store: RootState) => store.layout);
 
   return (
-    <Stack
-      direction={"column"}
-      alignItems={"center"}
-      height={"100vh"}
-      width={"100%"}
-      sx={{ overflowY: "hidden" }}
-    >
+    <Stack direction={"column"} alignItems={"center"} width={"100%"}>
       <Navbar />
       <Stack
         width={"calc(100% - 40px)"}
         p={"20px"}
-        sx={{ overflowY: "auto" }}
-        height={"100%"}
+        overflow={"auto"}
+        height={"calc(100vh - 140px)"}
       >
         <Breadcrumb />
         {showSpinner && <Spinner />}
