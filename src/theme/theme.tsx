@@ -5,12 +5,15 @@ declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
     primary: true;
     secondary: true;
+    header: true;
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
     breadcrumb: true;
+    headerLink: true;
+    caption: true;
   }
 }
 
@@ -19,12 +22,12 @@ export const customTheme = createTheme({
     MuiSelect: {
       styleOverrides: {
         root: {
-          height: '40px',
+          height: "40px",
           "& .MuiOutlinedInput-notchedOutline": {
             border: `1px solid ${colors.gray.light} !important`,
-          }
-        }
-      }
+          },
+        },
+      },
     },
     MuiStack: {
       styleOverrides: {
@@ -53,12 +56,12 @@ export const customTheme = createTheme({
           borderRadius: 20,
           paddingRight: 25,
           paddingLeft: 25,
-          '&:disabled': {
+          "&:disabled": {
             background: colors.gray.light,
-            color: 'white',
-            opacity: .7,
-            border: `1px solid ${colors.gray.light}`
-          }
+            color: "white",
+            opacity: 0.7,
+            border: `1px solid ${colors.gray.light}`,
+          },
         },
       },
       variants: [
@@ -102,6 +105,18 @@ export const customTheme = createTheme({
             },
           },
         },
+        {
+          props: { variant: "header" },
+          style: {
+            background: colors.secondary,
+            color: "white",
+            border: `1px solid white`,
+            "&:hover": {
+              background: "white",
+              color: colors.secondary,
+            },
+          },
+        },
       ],
     },
     MuiCircularProgress: {
@@ -121,7 +136,38 @@ export const customTheme = createTheme({
             fontSize: 14,
           },
         },
+        {
+          props: { variant: "headerLink" },
+          style: {
+            width: "fit-content",
+            fontWeight: 500,
+            fontSize: 14,
+            color: "white",
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          },
+        },
+        {
+          props: { variant: "caption" },
+          style: {
+            fontWeight: 300,
+            fontSize: 14,
+            color: colors.secondary,
+          },
+        },
       ],
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          background: "white",
+          borderRadius: "4px",
+          border: `1px solid ${colors.gray.light}`,
+          "& fieldset": { border: "none" },
+        },
+      },
     },
   },
 });

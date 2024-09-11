@@ -12,16 +12,16 @@ const SharedLayout = () => {
   return (
     <Stack direction={"column"} alignItems={"center"} width={"100%"}>
       <Navbar />
-      <Stack
-        width={"calc(100% - 40px)"}
-        p={"20px"}
-        overflow={"auto"}
-        height={"calc(100vh - 140px)"}
-      >
-        <Breadcrumb />
-        {showSpinner && <Spinner />}
-        <Outlet />
-      </Stack>
+        <Stack
+          width={"calc(100% - 40px)"}
+          overflow={"auto"}
+          p={"20px"}
+          height={'calc(100vh - 117px)'}
+        >
+          <Breadcrumb />
+          {showSpinner && <Spinner />}
+          <Outlet />
+        </Stack>
     </Stack>
   );
 };
