@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { colors } from "../../theme/palette";
 import { uppercaseFirstLetter } from "../../utils/utils";
-import CustomIcon from "../CustomIcon.compent";
+import CustomIcon from "../CustomIcon.component";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/Store";
 

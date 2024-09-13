@@ -1,6 +1,6 @@
 import { Stack, SxProps, Typography } from "@mui/material";
 import { colors } from "../../theme/palette";
-import CustomIcon from "../CustomIcon.compent";
+import CustomIcon from "../CustomIcon.component";
 import { IAddress, TCategory } from "../../types/locationSlice.type";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/Store";

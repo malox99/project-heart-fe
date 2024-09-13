@@ -1,5 +1,5 @@
 import { Stack, Typography } from "@mui/material";
-import CustomIcon from "../../components/CustomIcon.compent";
+import CustomIcon from "../../components/CustomIcon.component";
 import { colors } from "../../theme/palette";
 
 const ContactUs = () => {

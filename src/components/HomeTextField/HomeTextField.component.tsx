@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { setShowSpinner } from "../../store/reducers/layout/layoutSlice";
 import { colors } from "../../theme/palette";
 import { setToSessionStorage } from "../../utils/utils";
-import CustomIcon from "../CustomIcon.compent";
+import CustomIcon from "../CustomIcon.component";
 
 const HomeTextField = () => {
   const dispatch = useDispatch<any>();

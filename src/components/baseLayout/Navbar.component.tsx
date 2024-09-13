@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import { setSelectedRoute } from "../../store/reducers/layout/layoutSlice";
 import { colors } from "../../theme/palette";
+import { setUserData } from "../../store/reducers/user/userSlice";
 
 const sidebarStyle = {
   width: "calc(100% - 16px)",
@@ -30,6 +31,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(setSelectedRoute(location.pathname));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (
@@ -44,7 +46,7 @@ const Navbar = () => {
           </Typography>
         ))}
       </Stack>
-      <Button variant="header" onClick={() => navigate("/login")}>
+      <Button variant="header" onClick={() => dispatch(setUserData(null))}>
         Login
       </Button>
     </Stack>

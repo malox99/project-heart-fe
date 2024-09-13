@@ -36,3 +36,7 @@ export const getIconCustom = (name: string) => {
     </Stack>
   );
 };
+
+export const isEmptyJSON = (item: any) => {
+  return Object.keys(item).length === 0;
+};

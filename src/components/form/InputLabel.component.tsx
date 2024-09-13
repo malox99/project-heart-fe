@@ -5,18 +5,30 @@ import {
   TextFieldProps,
   SxProps,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { handleInput } from "../../store/reducers/form/formSlice";
+import { RootState } from "../../store/Store";
 
 type IProps = {
   label: string;
   customWidth?: number;
-  isSmall?: boolean;
+  size?: 'small';
+  name: string
 } & TextFieldProps;
 
 const InputLabel = (props: IProps) => {
-  const { label, customWidth, required, isSmall } = props;
+  const dispatch = useDispatch();
+  const { label, customWidth, required, size } = props;
   let sx: SxProps = {};
 
-  if (isSmall) {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    dispatch(handleInput({ name, value }));
+  };
+
+  if (size === 'small') {
     sx = { height: "45px", "& .MuiInputBase-root": { height: "45px" } };
   }
 
@@ -26,7 +38,14 @@ const InputLabel = (props: IProps) => {
         {label}
         {required ? " *" : ""}
       </Typography>
-      <TextField {...props} sx={sx} fullWidth label={null} placeholder={label} />
+      <TextField
+        {...props}
+        sx={sx}
+        fullWidth
+        onChange={(e) => handleChange(e)}
+        label={null}
+        placeholder={label}
+      />
     </Stack>
   );
 };

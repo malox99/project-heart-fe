@@ -8,23 +8,49 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   return (
-    <Stack height={"100vh"} alignItems={"center"} sx={{ background: `linear-gradient(${colors.gray.light}99, white)` }}>
+    <Stack
+      height={"100vh"}
+      alignItems={"center"}
+      width={'100%'}
+      sx={{ background: `linear-gradient(${colors.gray.light}99, white)` }}
+    >
       <Stack width={600} margin={"auto"}>
         <Typography variant="h4" mb={4}>
           Registrati
         </Typography>
         <Stack gap={4}>
           <Row>
-            <InputLabel label={"Nome"} required isSmall />
-            <InputLabel label={"Cognome"} required isSmall />
+            <InputLabel label={"Nome"} required size="small" name="name" />
+            <InputLabel
+              label={"Cognome"}
+              required
+              size="small"
+              name="surname"
+            />
           </Row>
           <Row>
-            <InputLabel label={"Email"} required isSmall />
-            <InputLabel label={"Numero di telefono"} required isSmall />
+            <InputLabel label={"Email"} required size="small" name="email" />
+            <InputLabel
+              label={"Numero di telefono"}
+              required
+              size="small"
+              name="phoneNumber"
+            />
           </Row>
           <Row>
-            <InputLabel label={"Username"} required isSmall />
-            <InputLabel label={"Password"} required type="password" isSmall />
+            <InputLabel
+              label={"Username"}
+              required
+              size="small"
+              name="username"
+            />
+            <InputLabel
+              label={"Password"}
+              required
+              type="password"
+              size="small"
+              name="password"
+            />
           </Row>
         </Stack>
         <Row sx={{ mt: 4 }}>

@@ -1,7 +1,7 @@
 import authFetch from "../../../utils/axios";
 
 export const getTagsThunk = async (_: string) => {
-  const getTagsURL = "/locations/tagsAndCategories/tags/getTags";
+  const getTagsURL = "/v1/locations/tagsAndCategories/tags/getTags";
   try {
     const res = await authFetch.get(getTagsURL);
     return res;
