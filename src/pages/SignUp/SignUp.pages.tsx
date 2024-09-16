@@ -3,15 +3,43 @@ import Row from "../../components/Row.component";
 import InputLabel from "../../components/form/InputLabel.component";
 import { useNavigate } from "react-router";
 import { colors } from "../../theme/palette";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/Store";
+import { useEffect } from "react";
+import { handleResetInput } from "../../store/reducers/form/formSlice";
+import {
+  setIsCompletedSignUp,
+  signUp,
+} from "../../store/reducers/user/userSlice";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<any>();
+  const { isCompletedSignUp } = useSelector((store: RootState) => store.user);
+  const { name, surname, email, phoneNumber, username, password } = useSelector(
+    (store: RootState) => store.form
+  );
+
+  useEffect(() => {
+    return () => {
+      dispatch(handleResetInput());
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (isCompletedSignUp) {
+      navigate(-1);
+      dispatch(setIsCompletedSignUp(false));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isCompletedSignUp]);
 
   return (
     <Stack
       height={"100vh"}
       alignItems={"center"}
-      width={'100%'}
+      width={"100%"}
       sx={{ background: `linear-gradient(${colors.gray.light}99, white)` }}
     >
       <Stack width={600} margin={"auto"}>
@@ -61,7 +89,19 @@ const SignUp = () => {
           >
             Indietro
           </Button>
-          <Button variant="primary" sx={{ flex: 1 }}>
+          <Button
+            variant="primary"
+            sx={{ flex: 1 }}
+            onClick={() => dispatch(signUp(""))}
+            disabled={
+              !name ||
+              !surname ||
+              !email ||
+              !phoneNumber ||
+              !username ||
+              !password
+            }
+          >
             Avanti
           </Button>
         </Row>

@@ -18,6 +18,7 @@ type IProps = {
 
 const InputLabel = (props: IProps) => {
   const dispatch = useDispatch();
+  const form = useSelector((store: RootState) => store.form);
   const { label, customWidth, required, size } = props;
   let sx: SxProps = {};
 
@@ -40,6 +41,7 @@ const InputLabel = (props: IProps) => {
       </Typography>
       <TextField
         {...props}
+        value={form[props.name]}
         sx={sx}
         fullWidth
         onChange={(e) => handleChange(e)}

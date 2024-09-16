@@ -1,6 +1,9 @@
 export interface ILayoutInitial {
   selectedRoute: string;
   showSpinner: boolean;
-  showToast: boolean;
-  errorMessage: string;
+  toast: {
+    show: boolean,
+    message: string,
+    status: 'success' | 'error'
+  }
 }

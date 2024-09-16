@@ -22,16 +22,34 @@ function App() {
     authFetch.interceptors.response.use(
       (res) => {
         store.dispatch(setShowSpinner(false));
+        if (res?.config.url === "/auth/signUp") {
+          dispatch(
+            setShowToast({
+              text: res?.data.message,
+              isOpen: true,
+              status: "success",
+            })
+          );
+          setTimeout(() => {
+            dispatch(
+              setShowToast({ text: "", isOpen: false, status: "success" })
+            );
+          }, 3000);
+        }
         return res;
       },
       (err) => {
         store.dispatch(setShowSpinner(false));
-          dispatch(
-            setShowToast({ text: err?.response?.data?.message, isOpen: true })
-          );
-          setTimeout(() => {
-            dispatch(setShowToast({ text: "", isOpen: false }));
-          }, 3000);
+        dispatch(
+          setShowToast({
+            text: err?.response?.data?.message,
+            isOpen: true,
+            status: "error",
+          })
+        );
+        setTimeout(() => {
+          dispatch(setShowToast({ text: "", isOpen: false, status: "error" }));
+        }, 3000);
 
         return err;
       }

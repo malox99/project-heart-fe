@@ -26,7 +26,7 @@ const MainZoneViewFilters = () => {
         >
           {categories.map((el, idx) => (
             <MenuItem key={idx} value={el}>
-              {el}
+              {el.toLowerCase()}
             </MenuItem>
           ))}
         </Select>
@@ -43,7 +43,7 @@ const MainZoneViewFilters = () => {
         >
           {tags.map((el, idx) => (
             <MenuItem key={idx} value={el}>
-              {el}
+              {el.toLowerCase()}
             </MenuItem>
           ))}
         </Select>

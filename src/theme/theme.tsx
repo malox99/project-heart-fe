@@ -14,15 +14,33 @@ declare module "@mui/material/Typography" {
     breadcrumb: true;
     headerLink: true;
     caption: true;
+    toast: true;
   }
 }
 
 export const customTheme = createTheme({
   components: {
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          boxShadow: "none!important",
+          border: `1px solid ${colors.gray.light} !important`,
+        },
+        root: {
+          "& .MuiList-root": {
+            borderRadius: 0,
+            padding: '0px!important'
+          },
+        },
+      },
+    },
     MuiSelect: {
       styleOverrides: {
         root: {
           height: "40px",
+          // '& [aria-expanded=true] ~ .MuiOutlinedInput-notchedOutline': {
+          //   borderRadius: '5px 5px 0 0',
+          // },
           "& .MuiOutlinedInput-notchedOutline": {
             border: `1px solid ${colors.gray.light} !important`,
           },
@@ -155,6 +173,15 @@ export const customTheme = createTheme({
             fontWeight: 300,
             fontSize: 14,
             color: colors.secondary,
+          },
+        },
+        {
+          props: { variant: "toast" },
+          style: {
+            fontWeight: 500,
+            fontSize: 14,
+            color: "white",
+            lineHeight: "22px",
           },
         },
       ],

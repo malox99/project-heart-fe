@@ -8,7 +8,7 @@ import { RootState } from "../../store/Store";
 import Toast from "../../components/Toast.component";
 
 const SharedLayout = () => {
-  const { showSpinner, showToast } = useSelector(
+  const { showSpinner, toast: {show} } = useSelector(
     (store: RootState) => store.layout
   );
 
@@ -23,7 +23,7 @@ const SharedLayout = () => {
       >
         <Breadcrumb />
         {showSpinner && <Spinner />}
-        {showToast && <Toast />}
+        {show && <Toast />}
         <Outlet />
       </Stack>
     </Stack>

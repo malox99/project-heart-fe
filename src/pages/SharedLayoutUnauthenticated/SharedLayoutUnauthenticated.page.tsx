@@ -6,14 +6,14 @@ import { RootState } from "../../store/Store";
 import Toast from "../../components/Toast.component";
 
 const SharedLayoutUnauthenticated = () => {
-  const { showSpinner, showToast } = useSelector(
+  const { showSpinner, toast: {show} } = useSelector(
     (store: RootState) => store.layout
   );
 
   return (
     <Stack direction={"column"} alignItems={"center"} width={"100%"}>
       {showSpinner && <Spinner />}
-      {showToast && <Toast />}
+      {show && <Toast />}
       <Outlet />
     </Stack>
   );

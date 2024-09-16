@@ -1,5 +1,6 @@
 import { IBodyLogin } from "../../../types/userSlice.type";
 import authFetch from "../../../utils/axios";
+import { handleResetInput } from "../form/formSlice";
 
 export const loginThunk = async (_: string, thunkAPI: any) => {
   const loginURL = "/auth/signIn";
@@ -18,13 +19,25 @@ export const loginThunk = async (_: string, thunkAPI: any) => {
   }
 };
 
-export const signUpThunk = async (id: string, thunkAPI: any) => {
-  const signUpURL = `/locations/getLocationById/${id}`;
-  const body = {};
+export const signUpThunk = async (_: string, thunkAPI: any) => {
+  const signUpURL = `/auth/signUp`;
+  const { name, surname, email, phoneNumber, username, password } =
+    thunkAPI.getState().form;
+
+  const body = {
+    name,
+    surname,
+    username,
+    phone: phoneNumber,
+    email,
+    password,
+    role: ["user"],
+  };
 
   try {
-    const res = await authFetch.get(signUpURL, body);
-
+    const res = await authFetch.post(signUpURL, body);
+    thunkAPI.dispatch(handleResetInput())
+    thunkAPI.navigate(-1)
     return res;
   } catch (error: any) {
     return error;

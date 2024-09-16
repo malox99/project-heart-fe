@@ -1,8 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IFormInitial } from "../../../types/formSlice.type";
 
-const initialState: { [key: string]: string } = {
-  username: '',
-  password: ''
+const initialState: IFormInitial & { [key: string]: string } = {
+  username: "",
+  password: "",
+  email: "",
+  phoneNumber: "",
+  name: "",
+  surname: "",
 };
 
 const formSlice = createSlice({

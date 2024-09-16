@@ -4,8 +4,11 @@ import { ILayoutInitial } from "../../../types/layoutSlice.type";
 const initialState: ILayoutInitial = {
   selectedRoute: "/",
   showSpinner: false,
-  showToast: false,
-  errorMessage: "",
+  toast: {
+    show: false,
+    message: "",
+    status: "success",
+  },
 };
 
 const layoutSlice = createSlice({
@@ -23,10 +26,18 @@ const layoutSlice = createSlice({
     },
     setShowToast: (
       state: ILayoutInitial,
-      { payload }: { payload: { text: string; isOpen: boolean } }
+      {
+        payload,
+      }: {
+        payload: { text: string; isOpen: boolean; status: "success" | "error" };
+      }
     ) => {
-      state.errorMessage = payload.text;
-      state.showToast = payload.isOpen;
+      const { isOpen, status, text } = payload;
+      state.toast = {
+        show: isOpen,
+        message: text,
+        status,
+      };
     },
   },
 });
