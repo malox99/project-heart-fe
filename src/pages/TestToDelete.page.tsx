@@ -54,7 +54,7 @@ const TestToDelete = () => {
         <button type="submit">Upload</button>
       </form>
 
-      <img src='http://localhost:8080/api/v1/images/getImages/6658da164cb37b70ba2a6015/4654614.jpg'/>
+      <img src='http://localhost:8080/resources/public/images/6658da164cb37b70ba2a6015/profilepic.jpeg'/>
     </div>
   );
 };
