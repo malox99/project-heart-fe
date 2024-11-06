@@ -4,9 +4,9 @@ import Carousel from "react-material-ui-carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { Rating } from "react-simple-star-rating";
+import CustomTab from "../../components/CustomTab/CustomTab.component";
 import { RootState } from "../../store/Store";
 import { getLocationDetail } from "../../store/reducers/locations/locationsSlice";
-import { colors } from "../../theme/palette";
 import Comments from "./components/Comments.component";
 
 const LocationDetail = () => {
@@ -18,6 +18,7 @@ const LocationDetail = () => {
 
   useEffect(() => {
     dispatch(getLocationDetail(splittedLocation[splittedLocation.length - 1]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -39,6 +40,7 @@ const LocationDetail = () => {
             {locationDetail.photos?.length > 0
               ? locationDetail.photos.map((photo, i) => (
                   <img
+                    alt={`img-${i}`}
                     key={i}
                     width={"100%"}
                     height={"300px"}
@@ -49,14 +51,13 @@ const LocationDetail = () => {
               : null}
           </Carousel>
 
-          <Stack
-            height={"1px"}
-            width={"100%"}
-            my={3}
-            sx={{ background: colors.gray.light }}
+          <CustomTab
+            items={[
+              { label: "Recensioni", component: <Comments /> },
+              { label: "Menu", component: <>MENU</> },
+              { label: "Contatti", component: <>CONTATTI</> },
+            ]}
           />
-
-          <Comments />
         </>
       )}
     </Stack>

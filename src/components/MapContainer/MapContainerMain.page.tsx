@@ -1,6 +1,11 @@
 import { LatLngExpression } from "leaflet";
-import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import {
+  MapContainer,
+  Marker,
+  TileLayer
+} from "react-leaflet";
 import { ILocationAddress } from "../../types/locationSlice.type";
+import BounceMap from "./BounceMap/BounceMap.component";
 import MarkerCustom, { getRightIcon } from "./Marker/Marker.component";
 
 interface IProps {
@@ -10,7 +15,6 @@ interface IProps {
 }
 
 const MapContainerMain = ({ height, center, locations }: IProps) => {
-
   return (
     <MapContainer
       style={{ height: height || "100vh" }}
@@ -19,6 +23,7 @@ const MapContainerMain = ({ height, center, locations }: IProps) => {
       fadeAnimation
       zoomControl={false}
     >
+      <BounceMap center={center as LatLngExpression} locations={locations} />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       <Marker
         interactive
@@ -27,7 +32,7 @@ const MapContainerMain = ({ height, center, locations }: IProps) => {
       />
       {locations?.length > 0 &&
         locations.map(({ location }: ILocationAddress, idx) => (
-          <MarkerCustom key={idx} location={location} center={center}/>
+          <MarkerCustom key={idx} location={location} center={center} />
         ))}
     </MapContainer>
   );
