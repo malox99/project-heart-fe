@@ -21,7 +21,9 @@ import {
 const Locations = () => {
   const dispatch = useDispatch<any>();
   const navigate = useNavigate();
-  const { locations } = useSelector((state: RootState) => state.locations);
+  const { locations, maxDistance } = useSelector((state: RootState) => state.locations);
+  const { categoriesSelected } = useSelector((state: RootState) => state.categories);
+  const { tagsSelected } = useSelector((state: RootState) => state.tags);
 
   const startPosition = getFromSessionStorage("startPosition");
 
@@ -36,6 +38,14 @@ const Locations = () => {
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      dispatch(getLocations(""));
+    }, 800)
+    return () => clearTimeout(timeout)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoriesSelected, tagsSelected, maxDistance]);
 
   return (
     <>

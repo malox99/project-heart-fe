@@ -25,7 +25,7 @@ const Comments = () => {
           <Stack>
             <Stack direction={"row"} alignItems={"baseline"} gap={2}>
               <Typography variant="body1">{el.name}</Typography>
-              <Rating initialValue={el.rating} disableFillHover size={15} />
+              <Rating readonly initialValue={el.rating} disableFillHover size={15} />
             </Stack>
             <Typography variant="caption">{el.date}</Typography>
 

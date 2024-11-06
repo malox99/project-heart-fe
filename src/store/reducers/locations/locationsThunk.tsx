@@ -5,8 +5,15 @@ export const getLocationsThunk = async (_: string, thunkAPI: any) => {
   const getLocationsURL = "/v1/locations/findNearLocationsAndAddress";
   const startPosition = getFromSessionStorage("startPosition");
   const maxDistance = thunkAPI.getState().locations.maxDistance;
+  const { categoriesSelected } = thunkAPI.getState().categories;
+  const { tagsSelected } = thunkAPI.getState().tags;
 
-  const body = { currentPoint: startPosition, maxDistance };
+  const body = {
+    currentPoint: startPosition,
+    maxDistance,
+    categories: categoriesSelected,
+    tags: tagsSelected,
+  };
 
   try {
     const res = await authFetch.post(getLocationsURL, body);

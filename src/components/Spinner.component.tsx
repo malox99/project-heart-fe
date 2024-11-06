@@ -12,7 +12,7 @@ const Spinner = () => {
         position: 'absolute',
         top: 0,
         left: 0,
-        zIndex: 10
+        zIndex: 10000
     }}>
         <CircularProgress sx={{width: '4rem', height: '4rem'}}/>
     </Stack>

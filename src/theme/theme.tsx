@@ -6,6 +6,8 @@ declare module "@mui/material/Button" {
     primary: true;
     secondary: true;
     header: true;
+    tab: true;
+    'tab-selected': true;
   }
 }
 
@@ -29,7 +31,7 @@ export const customTheme = createTheme({
         root: {
           "& .MuiList-root": {
             borderRadius: 0,
-            padding: '0px!important'
+            padding: "0px!important",
           },
         },
       },
@@ -132,6 +134,32 @@ export const customTheme = createTheme({
             "&:hover": {
               background: "white",
               color: colors.secondary,
+            },
+          },
+        },
+        {
+          props: { variant: "tab" },
+          style: {
+            background: "white",
+            color: colors.secondary,
+            border: `1px solid ${colors.secondary}`,
+            fontWeight: 600,
+            borderRadius: '8px',
+            "&:hover": {
+              background: "white",
+            },
+          },
+        },
+        {
+          props: { variant: "tab-selected" },
+          style: {
+            background: colors.secondary,
+            color: "white",
+            border: `1px solid ${colors.secondary}`,
+            fontWeight: 600,
+            borderRadius: '8px',
+            "&:hover": {
+              background: colors.secondary,
             },
           },
         },
