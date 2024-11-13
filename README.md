@@ -1,3 +1,13 @@
+# Per rilasciare direttamente sul server
+Posizionarsi nella cartella contenente deploy.sh
+eseguire il comando\
+ `chmod u+x deploy.sh`\
+per darsi i permessi di esecuzione\
+infine eseguire \
+ `./deploy.sh`\
+verrà richiesta la password che hai.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
